@@ -9623,7 +9623,7 @@
   AblePlayer.prototype.highlightTranscript = function (currentTime) {
 
     //show highlight in transcript marking current caption
-
+    console.log("highlightTranscript called with time "+currentTime);
     if (!this.transcriptType) {
       return;
     }
@@ -9641,12 +9641,14 @@
         // move all previous highlights before adding one to current span
         thisObj.$transcriptArea.find('.able-highlight').removeClass('able-highlight');
         $(this).addClass('able-highlight');
+        console.log("highlightTranscript called highlighting.");
         return false;
       }
     });
     thisObj.currentHighlight = $('.able-highlight');
     if (thisObj.currentHighlight.length === 0) {
-      // Nothing highlighted.
+      // Nothing highlighted
+      console.log("highlightTranscript called nothing highlighted.");
       thisObj.currentHighlight = null;
     }
   };
@@ -10308,10 +10310,12 @@
 
     // Handle seek bar events.
     this.seekBar.bodyDiv.on('startTracking', function (event) {
+      console.log("startTracking event.");
       thisObj.pausedBeforeTracking = thisObj.isPaused();
       thisObj.pauseMedia();
     }).on('tracking', function (event, position) {
       // Scrub transcript, captions, and metadata.
+      console.log("startTracking event.");
       thisObj.highlightTranscript(position);
       thisObj.updateCaption(position);
       thisObj.showDescription(position);
